@@ -91,8 +91,6 @@
       );
     }
 
-   
-
     function App(){
       const initItemList = [
         { num: 1, title: "자바스크립트 공부", done: true },
@@ -133,7 +131,8 @@
       function deleteItem(num) {
         console.log(num, "할일 삭제");
         
-        const newItemList = itemList.filter( item => item.num !== num)
+        // num 이 아닌애들만 필터링 해서 새로운 배열로 만든다. = 해당 num 을 삭제한다.
+        const newItemList = itemList.filter( item => item.num !== num);
         setItemList(newItemList);
       }
       
