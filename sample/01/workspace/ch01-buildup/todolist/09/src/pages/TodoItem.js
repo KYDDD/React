@@ -1,6 +1,7 @@
 import Reaction from "../reaction.js";
 
 function TodoItem({ item, toggleDone, deleteItem }){
+  console.log(item);
   return(
     Reaction.createElement('li', { 'data-num': item.num },
       Reaction.createElement('span', null, item.num ),

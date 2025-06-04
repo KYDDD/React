@@ -121,7 +121,7 @@
       function toggleDone(num) {
         console.log(num, "완료/미완료");
       
-       const newItemList = itemList.map(item=>{ item.num === num ? { ...item, done:!item.done } : item })
+       const newItemList = itemList.map(item=>{ return item.num === num ? { ...item, done:!item.done } : item })
 
         // 화면 갱신, done 값에 따라서 <s> 추가 또는 삭제
         setItemList( newItemList );
