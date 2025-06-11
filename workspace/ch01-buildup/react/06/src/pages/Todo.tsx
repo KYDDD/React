@@ -1,6 +1,6 @@
 import React from "react";
-import TodoInput from "./todoinput";
-import TodoList from "./todoList";
+import TodoInput from "./TodoInput";
+import TodoList from "./TodoList";
 import type { TodoItem } from "./TodoItem";
    
    function Todo(){

@@ -28,8 +28,8 @@ import { useState, type KeyboardEvent } from "react";
 
     return(  
          <div className="todoinput">
-                  <input type="text" autoFocus value={ title } onChange={ (e) => setTitle(e.target.value) } onKeyDown={ handleAddKeydown } />
-                  <button type="button" onClick = { handleAdd }>추가</button>
+            <input type="text" autoFocus value={ title } onChange={ (e) => setTitle(e.target.value) } onKeyDown={ handleAddKeydown } />
+            <button type="button" onClick = { handleAdd }>추가</button>
          </div>
         )
     }
