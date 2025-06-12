@@ -13,36 +13,88 @@ class Parent extends Component {
     return (
       <div>
         <h1>03 클래스 컴포넌트 - 컴포넌트의 라이프 사이클</h1>
-        <ClickMe level={5} />
+        <ClickMe level={10} />
       </div>
     );
   }
 }
 
 class ClickMe extends Component<ClickMeProps, ClickMeState> {
-  // state/setState는 부모에(Component) 정의되어 있는 이름
-  // 상태는 state 변수 하나만 사용 가능해서 여러개의 상태를 관리하려면 객체로 지정
-  // 함수형에서는 state 변수를 여러개 지정 가능(useState 훅)
-  state = { count: 0 };
-
+  //1-1
   constructor(props: ClickMeProps) {
-    // 부모 클래스의 생성자를 통해 this를 생성하고 초기화 하므로
-    // super()를 호출해야 자식 클래스에서 this사용가능
-    // super(props)를 호출해야 자식 클래스에서 this.props 사용가능능
+    console.log("1-1 constructor 호출됨.");
     super(props);
     this.state = { count: props.level || 1 };
+  }
+
+  //1-2/ 2-1
+  static getDerivedStateFromProps(props: ClickMeProps, state: ClickMeState) {
+    console.log("1-2/2-1 getDerivedStateFromProps 호출됨");
+    console.log("\tprops", props);
+    console.log("\tstate", state);
+
+    if (state.count / (props.level || 1) > 10) {
+      return {
+        count: (props.level || 1) * 10,
+      }; //새로운 값으로 state업데이트
+    }
+    return null; // state를 업데이트 하지 않음
+  }
+
+  //2-2 이걸따로 안만들더라도 purecomponent를 상속받으면 다 되어있음음
+  shouldComponentUpdate(nextProps: ClickMeProps, nextState: ClickMeState) {
+    console.log("2-2 shouldComponentUpdate 호출됨.");
+    console.log("\t현재값", this.props, this.state);
+    console.log("\t다음값", nextProps, nextState);
+    if (this.props.level === nextProps.level && this.state.count === nextState.count) {
+      return false; //render 호출 x
+    } else {
+      return true; // render 호츌 o
+    }
   }
 
   increase = () => {
     this.setState({ count: this.state.count + (this.props.level ?? 1) });
   };
+
+  //1-3/ 2-3
   render() {
+    console.log("1-3/2-3 render 호출됨");
+
+    //api 서버로 부터 데이터 페칭x
     return (
       <div>
         클릭 횟수 X {this.props.level}: {this.state.count}
         <button onClick={this.increase}>클릭</button>
       </div>
     );
+  }
+
+  // 1-4
+  componentDidMount() {
+    // 함수형 컴포넌트 에서는 useEffect() 훅이 이 역할을 함.
+    //api 서버로 부터 데이터 페칭과 같은 side effect가 발생하는 작업은 이곳에서 작성
+    console.log("1-4 componentDidMount 호출됨");
+    console.log(document.querySelector("button")?.textContent);
+  }
+
+  //2-4
+  getSnapshotBeforeUpdate(prevProps: ClickMeProps, prevState: ClickMeState) {
+    console.log("2-4 getSnapshotBeforeUpdate 호출됨.");
+    return "snapshot hello";
+  }
+
+  //2-5
+  componentDidUpdate(prevProps: ClickMeProps, prevState: ClickMeState, snapshot: string) {
+    console.log("2-5 componentDidUpdate 호출됨.");
+    console.log("\t이전값", prevProps, prevState);
+    console.log("\t현재값", this.props, this.state);
+    console.log("\tsnapshot", snapshot);
+  }
+
+  //3-1
+  componentWillUnmount(): void {
+    console.log("3-1 componentWillUnmount");
   }
 }
 
