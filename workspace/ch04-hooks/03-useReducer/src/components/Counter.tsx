@@ -6,10 +6,6 @@ interface CounterProps {
   children: string;
 }
 
-// console.log(counterReducer(6, { type: "DOWN", value: 1 })); //5
-// console.log(counterReducer(8, { type: "UP", value: 2 })); //10
-// console.log(counterReducer(6, { type: "RESET", value: 5 })); //5
-
 // Counter 컴포넌트
 function Counter({ children = "0" }: CounterProps) {
   console.log("\tCounter 호출됨");
