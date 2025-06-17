@@ -16,7 +16,7 @@ interface Todo {
 }
 
 // Todo 목록 조회 성공시 응답 데이터 타입 정의
-interface TodoListRes {
+export interface TodoListRes {
   ok: 1; // 성공 여부 (1: 성공)
   items: Todo[]; // Todo 아이템 배열
   pagination: {
@@ -28,6 +28,11 @@ interface TodoListRes {
   };
 }
 
+interface TodoItemRes {
+  ok: 1;
+  item: Todo;
+}
+
 // 에러 응답 데이터 타입 정의
 interface ErrorRes {
   ok: 0; // 성공 여부 (0: 실패)
@@ -35,11 +40,11 @@ interface ErrorRes {
 }
 
 // 응답 데이터 타입 정의
-type ResData = TodoListRes | ErrorRes;
+type ResData = TodoListRes | TodoItemRes | ErrorRes;
 
 function useFetch(fetchParams: FetchParams) {
   // Todo 목록을 저장할 상태 (초기값: null)
-  const [data, setData] = useState<TodoListRes | null>(null);
+  const [data, setData] = useState<ResData | null>(null);
 
   // 에러 메시지를 저장할 상태 (초기값: null)
   const [error, setError] = useState<Error | null>(null);
