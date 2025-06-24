@@ -1,4 +1,4 @@
-interface TodoItem {
+export interface TodoItem {
   _id: number;
   title: string;
   done: boolean;
@@ -6,12 +6,13 @@ interface TodoItem {
 
 interface TodoItemProps {
   item: TodoItem;
-  hello: string;
+  deleteItem: (_id: number) => void;
 }
 
-function TodoItem({ item }: TodoItemProps) {
+function TodoItem({ item, deleteItem }: TodoItemProps) {
   const handleDelete = (_id: number) => {
     console.log(_id, "삭제요청.");
+    deleteItem(_id);
   };
   return (
     <>
