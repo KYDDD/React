@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function Right3({ setCount }: { setCount: React.Dispatch<React.SetStateAction<number>> }) {
+function Right3({ countUp }: { countUp: (step: number) => void }) {
   useEffect(() => {
     console.log("#### Right3 렌더링.");
   });
@@ -10,7 +10,7 @@ function Right3({ setCount }: { setCount: React.Dispatch<React.SetStateAction<nu
       <h3>Right3</h3>
       <button
         onClick={() => {
-          setCount((pre) => pre + 1);
+          countUp(1);
         }}
       >
         +1
