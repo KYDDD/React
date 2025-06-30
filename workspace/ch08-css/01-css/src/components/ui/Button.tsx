@@ -1,13 +1,16 @@
-interface ButtonProps {
-  children: string;
-  type?: "button" | "submit" | "reset";
+import "./Button.css";
+
+//원래 html버튼이 쓸수있는 속성들을 상속
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  bg?: string;
 }
 
-function Button({ children, type="button", color, onClick: handleClick }: ButtonProps){
+function Button({ children, bg, color, ...rest }: ButtonProps) {
   return (
-    <button type={ type } onClick={ handleClick } style={{ backgroundColor: color }} className="rounded-button">{ children }</button>
+    <button className={`button bg-${bg}-text-${color}`} {...rest}>
+      {children}
+    </button>
   );
 }
 
