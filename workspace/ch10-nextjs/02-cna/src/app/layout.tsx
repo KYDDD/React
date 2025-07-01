@@ -43,7 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </ul>
           </nav>
         </header>
-
         {children}
       </body>
     </html>
