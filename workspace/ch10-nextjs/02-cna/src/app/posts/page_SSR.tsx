@@ -17,8 +17,8 @@ export default async function ListPage() {
   //   });
   // }
   const data = await fetchPosts();
-
   console.log("API 서버로부터 받은 게시물 목록 수", data.length);
+
   const posts = data.map((post) => (
     <li key={post._id}>
       <Link prefetch={true} href={`/posts/${post._id}`}>

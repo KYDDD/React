@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   //주소창의 path값 추출
   const pathname = usePathname();
-  console.log(pathname);
+  // console.log(pathname);
   const isActive = (path: string) => (pathname === path ? "cs-active" : "");
   return (
     <html lang="ko">
@@ -31,12 +31,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Link>
               </li>
               <li>
-                <Link href="/user/login" className={`hover:underline ${isActive("/user/login")}`}>
+                <Link href="/login" className={`hover:underline ${isActive("/login")}`}>
                   로그인
                 </Link>
               </li>
               <li>
-                <Link href="/user/signup" className={`hover:underline ${isActive("/user/signup")}`}>
+                <Link href="/signup" className={`hover:underline ${isActive("/signup")}`}>
                   회원가입
                 </Link>
               </li>
